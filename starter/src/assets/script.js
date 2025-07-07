@@ -64,6 +64,84 @@
    npm run test
 */
 
+const cart = [];
+
+
+const products = [
+  {
+    name: "cherry",
+    price: 1.99,
+    quantity: 0,
+    productId: 100,
+    image: "./images/cherry.jpg"
+  },
+  {
+    name: "orange",
+    price: 3.99,
+    quantity: 0,
+    productId: 101,
+    image: "./images/orange.jpg"
+  },
+  {
+    name: "strawberry",
+    price: 2.50,
+    quantity: 0,
+    productId: 102,
+    image: "./images/strawberry.jpg"
+  }
+];
+
+const increaseQuantity = (productId)=>{
+  for(let i = 0; i < products.length; i++){
+    if(products[i].productId === productId){
+      products[i].quantity += 1;
+      return
+    }
+  }
+};
+
+const decreaseQuantity = (productId)=>{
+  for(let i = 0; i < products.length; i++){
+    if(products[i].productId === productId){
+      products[i].quantity += 1;
+      return
+    }
+  }
+};
+const removeProductFromCart = ()=>{};
+const cartTotal = ()=>{};
+const pay = ()=>{};
+const emptyCart = ()=>{};
+
+console.log("cart before:", cart)
+const addProductToCart = (productId)=>{
+  //make sure you change the variable names in loop!
+  for(let i = 0; i < products.length; i++){
+    if(products[i].productId === productId){
+      let isInCart = false;
+      for(let x = 0; x< cart.length; x++){
+        if(productId === cart[x].productId){
+          isInCart = true;
+          break;
+        }
+      }
+
+      if(!isInCart){
+        cart.push(products[i]);
+      }
+       increaseQuantity(productId)
+        console.log("cart after", cart)
+        return
+    }
+  }
+    return null;
+};
+
+
+
+console.log(cart)
+
+
 module.exports = {
    products,
    cart,
@@ -77,3 +155,4 @@ module.exports = {
    /* Uncomment the following line if completing the currency converter bonus */
    // currency
 }
+
