@@ -103,12 +103,27 @@ const increaseQuantity = (productId)=>{
 const decreaseQuantity = (productId)=>{
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
-      products[i].quantity += 1;
+      products[i].quantity -= 1;
       return
     }
   }
 };
-const removeProductFromCart = ()=>{};
+const removeProductFromCart = (productId)=>{
+  for(let i = 0; i < products.length; i++){
+    if(products[i].productId === productId){
+      isInCart = true;
+      for(let x = 0; x < cart.length; x++){
+        isInCart = false
+        break
+      }
+    }
+    if(!isInCart){
+      cart.splice(products[i])
+    }
+    decreaseQuantity(productId)
+    return
+  }
+};
 const cartTotal = ()=>{};
 const pay = ()=>{};
 const emptyCart = ()=>{};
