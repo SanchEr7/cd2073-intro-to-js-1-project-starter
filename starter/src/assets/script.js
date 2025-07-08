@@ -65,6 +65,7 @@
 */
 
 const cart = [];
+let total = 0;
 
 
 const products = [
@@ -108,25 +109,11 @@ const decreaseQuantity = (productId)=>{
     }
   }
 };
-const removeProductFromCart = (productId)=>{
-  for(let i = 0; i < products.length; i++){
-    if(products[i].productId === productId){
-      isInCart = true;
-      for(let x = 0; x < cart.length; x++){
-        isInCart = false
-        break
-      }
-    }
-    if(!isInCart){
-      cart.splice(products[i])
-    }
-    decreaseQuantity(productId)
-    return
-  }
-};
-const cartTotal = ()=>{};
+
+
+
 const pay = ()=>{};
-const emptyCart = ()=>{};
+
 
 console.log("cart before:", cart)
 const addProductToCart = (productId)=>{
@@ -152,7 +139,30 @@ const addProductToCart = (productId)=>{
     return null;
 };
 
+const removeProductFromCart = (productId)=>{
+  for(let i = 0; i < products.length; i++){
+    if(products[i].productId === productId){
+      isInCart = true;
+      for(let x = 0; x < cart.length; x++){
+        isInCart = false
+        break
+      }
+    }
+    if(!isInCart){
+      cart.splice(products[i]) && total.splice(i, 0);
+    }
+    decreaseQuantity(productId)
+    return
+  }
+};
 
+
+const cartTotal = ()=>{
+  for(let i = 0; i < cart.length; i++){
+    total += cart[i].price;
+  }
+  return total.toFixed(2);
+};
 
 console.log(cart)
 
