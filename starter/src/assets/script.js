@@ -166,13 +166,15 @@ const removeProductFromCart = (productId)=>{
   for(let i = cart.length - 1; i >= 0; i--){
    if(cart[i].productId === productId){
       cart.splice(i, 1);
-      break;
+      if(cart.length === 0){
+        emptyCart();
+      }
       
     }
   }
-  for(let i = 0; i < products.length; i++){
-    if(products[i].productId === productId){
-      products[i].quantity = 0;
+  for(let x = 0; x < cart.length; i++){
+    if(cart[i].productId === productId){
+      cart[i].quantity = 0;
       
     }else if(cart.length === 0){
       emptyCart()
