@@ -93,6 +93,21 @@ const products = [
   }
 ];
 
+const cartTotal = ()=>{
+  for(let i = 0; i < cart.length; i++){
+    total += cart[i].quantity * cart[i].price;
+  }
+  return total.toFixed(2);
+};
+
+const emptyCart = () => {
+  cart.length = 0;
+
+  for(let i = 0; i < products.length; i++){
+    products[i].quantity = 0;
+  }
+}
+
 const increaseQuantity = (productId)=>{
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
@@ -108,7 +123,10 @@ const decreaseQuantity = (productId)=>{
       if(products[i].quantity > 0) {
       products[i].quantity -= 1;
       }
-      return
+      if(cart.length === 0){
+        emptyCart()
+        break
+      }
     }
   }
 };
@@ -155,27 +173,16 @@ const removeProductFromCart = (productId)=>{
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
       products[i].quantity = 0;
+      
+    }else if(cart.length === 0){
+      emptyCart()
       break
     }
   }
 };
 
 
-const cartTotal = ()=>{
-  let Total = 0;
-  for(let i = 0; i < cart.length; i++){
-    Total += cart[i].quantity * cart[i].price;
-  }
-  return total.toFixed(2);
-};
 
-const emptyCart = () => {
-  cart.length = 0;
-
-  for(let i = 0; i < products.length; i++){
-    products[i].quantity = 0;
-  }
-}
 
 console.log(cart)
 
@@ -183,6 +190,7 @@ console.log(cart)
 module.exports = {
    products,
    cart,
+   total,
    addProductToCart,
    increaseQuantity,
    decreaseQuantity,
