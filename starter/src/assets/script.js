@@ -66,6 +66,7 @@
 
 const cart = [];
 let total = 0;
+// let isInCart = false;
 
 
 const products = [
@@ -104,7 +105,9 @@ const increaseQuantity = (productId)=>{
 const decreaseQuantity = (productId)=>{
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
+      if(products[i].quantity > 0) {
       products[i].quantity -= 1;
+      }
       return
     }
   }
@@ -116,11 +119,13 @@ const pay = ()=>{};
 
 
 console.log("cart before:", cart)
+
 const addProductToCart = (productId)=>{
   //make sure you change the variable names in loop!
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
       let isInCart = false;
+
       for(let x = 0; x< cart.length; x++){
         if(productId === cart[x].productId){
           isInCart = true;
@@ -140,29 +145,37 @@ const addProductToCart = (productId)=>{
 };
 
 const removeProductFromCart = (productId)=>{
+  for(let i = cart.length - 1; i >= 0; i--){
+   if(cart[i].productId === productId){
+      cart.splice(i, 1);
+      break;
+      
+    }
+  }
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
-      isInCart = true;
-      for(let x = 0; x < cart.length; x++){
-        isInCart = false
-        break
-      }
+      products[i].quantity = 0;
+      break
     }
-    if(!isInCart){
-      cart.splice(products[i]) && total.splice(i, 0);
-    }
-    decreaseQuantity(productId)
-    return
   }
 };
 
 
 const cartTotal = ()=>{
+  let Total = 0;
   for(let i = 0; i < cart.length; i++){
-    total += cart[i].price;
+    Total += cart[i].quantity * cart[i].price;
   }
   return total.toFixed(2);
 };
+
+const emptyCart = () => {
+  cart.length = 0;
+
+  for(let i = 0; i < products.length; i++){
+    products[i].quantity = 0;
+  }
+}
 
 console.log(cart)
 
