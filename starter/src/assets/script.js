@@ -94,10 +94,13 @@ const products = [
 ];
 
 const cartTotal = ()=>{
+  let currentTotal = 0;
   for(let i = 0; i < cart.length; i++){
-    total += cart[i].quantity * cart[i].price;
+    currentTotal += cart[i].quantity * cart[i].price;
   }
-  return total.toFixed(2);
+  total = Number(currentTotal);
+  console.log(currentTotal)
+  return Number(currentTotal.toFixed(2))
 };
 
 const emptyCart = () => {
@@ -108,32 +111,76 @@ const emptyCart = () => {
   }
 }
 
+// const increaseQuantity = (productId)=>{
+//   for(let i = 0; i < products.length; i++){
+//     if(products[i].productId === productId){
+//       products[i].quantity += 1;
+//       return
+//     }
+//   }
+// };
+
+
+
+const pay = (num)=>{
+ const totalCost = cartTotal();
+ return num - totalCost;
+}
+
+
 const increaseQuantity = (productId)=>{
-  for(let i = 0; i < products.length; i++){
-    if(products[i].productId === productId){
-      products[i].quantity += 1;
+  for(let i = 0; i < cart.length; i++){
+    if(cart[i].productId === productId){
+      cart[i].quantity += 1;
+     return 
+    }
+  }
+}
+
+// const decreaseQuantity = (productId)=>{
+//   for(let i = 0; i < products.length; i++){
+//     if(products[i].productId === productId){
+//       if(products[i].quantity > 0) {
+//       products[i].quantity -= 1;
+//         if(products[i] === 0){
+//           emptyCart(productId);
+//         }
+//       }
+
+//     }
+//   } 
+        
+      
+    
+//     return
+//   }
+const decreaseQuantity = (productId) => {
+  for(let i = cart.length - 1; i >= 0; i--){
+    if(cart[i].productId === productId){
+      if(cart[i].quantity > 0){
+        cart[i].quantity -= 1;
+          if(cart[i].quantity === 0){
+            cart.splice(i, 1);
+          }
+      }
       return
     }
   }
-};
 
-const decreaseQuantity = (productId)=>{
   for(let i = 0; i < products.length; i++){
     if(products[i].productId === productId){
-      if(products[i].quantity > 0) {
-      products[i].quantity -= 1;
+      if(products[i].quantity > 0){
+        products[i].quantity -= 1;
       }
-      
-        
-      }
+      return
     }
-    return
   }
+}
 
 
 
 
-const pay = ()=>{};
+
 
 
 console.log("cart before:", cart)
@@ -156,6 +203,7 @@ const addProductToCart = (productId)=>{
       }
        increaseQuantity(productId)
         console.log("cart after", cart)
+        return;
         
     }
   }
@@ -165,9 +213,11 @@ const addProductToCart = (productId)=>{
 const removeProductFromCart = (productId)=>{
   for(let i = cart.length - 1; i >= 0; i--){
    if(cart[i].productId === productId){
+    cart[i].quantity = 0;
       cart.splice(i, 1);
       
      }
+     
     }
     return
   }
