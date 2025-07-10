@@ -65,7 +65,7 @@
 */
 
 const cart = [];
-let total = 0;
+// let total = 0;
 // let isInCart = false;
 
 
@@ -99,12 +99,11 @@ const cartTotal = ()=>{
     currentTotal += cart[i].quantity * cart[i].price;
   }
   total = Number(currentTotal);
-  console.log(currentTotal)
   return Number(currentTotal.toFixed(2))
 };
 
 const emptyCart = () => {
-  cart.length = 0;
+ 
 
   for(let i = 0; i < products.length; i++){
     products[i].quantity = 0;
@@ -202,7 +201,6 @@ const addProductToCart = (productId)=>{
         cart.push(products[i]);
       }
        increaseQuantity(productId)
-        console.log("cart after", cart)
         return;
         
     }
@@ -260,7 +258,7 @@ console.log(cart)
 module.exports = {
    products,
    cart,
-   total,
+  //  total,
    addProductToCart,
    increaseQuantity,
    decreaseQuantity,
