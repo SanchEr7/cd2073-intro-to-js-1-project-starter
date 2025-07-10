@@ -229,7 +229,25 @@ const removeProductFromCart = (productId)=>{
   //     emptyCart()
       
     
-  
+  const currency = {
+    rates:{
+      USD: 1.0,
+      EUR: 0.85,
+      JPY: 150
+
+    },
+
+    convertDollars: function(dollarAmount, foreignCurrency){
+      const convertedMoney = dollarAmount * this.rates[foreignCurrency];
+
+      if(foreignCurrency === "JPY"){
+        return Math.round(converted);
+      }
+
+      return Math.round(convertedMoney * 100) / 100;
+    }
+
+  };
  
 
 
@@ -251,6 +269,6 @@ module.exports = {
    pay, 
    emptyCart,
    /* Uncomment the following line if completing the currency converter bonus */
-   // currency
+   currency
 }
 
