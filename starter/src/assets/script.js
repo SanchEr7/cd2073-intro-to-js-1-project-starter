@@ -67,6 +67,9 @@
 const cart = [];
 // let total = 0;
 // let isInCart = false;
+let totalPaid = 0;
+//changed to let to reassign, shot in the dark but
+
 
 
 const products = [
@@ -123,7 +126,13 @@ const emptyCart = () => {
 
 const pay = (num)=>{
  const totalCost = cartTotal();
- return num - totalCost;
+ if(num >= totalCost) {
+    totalPaid += totalCost;
+    return num - totalCost;
+ }else{
+    return totalCost - num;
+ }
+ 
 }
 
 
