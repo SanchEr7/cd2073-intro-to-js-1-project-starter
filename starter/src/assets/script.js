@@ -68,7 +68,7 @@ const cart = [];
 // let total = 0;
 // let isInCart = false;
 let totalPaid = 0;
-//changed to let to reassign, shot in the dark but
+//changed to let to reassign, shot in the dark but I'm trying
 
 
 
@@ -105,13 +105,7 @@ const cartTotal = ()=>{
   return Number(currentTotal.toFixed(2))
 };
 
-const emptyCart = () => {
- 
 
-  for(let i = 0; i < products.length; i++){
-    products[i].quantity = 0;
-  }
-}
 
 // const increaseQuantity = (productId)=>{
 //   for(let i = 0; i < products.length; i++){
@@ -256,6 +250,17 @@ const removeProductFromCart = (productId)=>{
 
   };
  
+  const emptyCart = () => {
+ 
+
+  for(let i = 0; i < products.length; i++){
+    products[i].quantity = 0;
+    if(products[i].quantity = 0){
+      products[i].splice(i, 1);
+      return
+    }
+  }
+}
 
 
 
