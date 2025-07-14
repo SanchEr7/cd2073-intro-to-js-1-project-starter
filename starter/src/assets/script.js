@@ -105,19 +105,6 @@ const cartTotal = ()=>{
   return Number(currentTotal.toFixed(2))
 };
 
-
-
-// const increaseQuantity = (productId)=>{
-//   for(let i = 0; i < products.length; i++){
-//     if(products[i].productId === productId){
-//       products[i].quantity += 1;
-//       return
-//     }
-//   }
-// };
-
-
-
 const pay = (num)=>{
  const totalCost = cartTotal();
  if(num >= totalCost) {
